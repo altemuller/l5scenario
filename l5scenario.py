@@ -1,12 +1,13 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 
 '''
 Langrisser V SCEN Tool
 A tool to extract and rebuild SCEN files in Langrisser V PSX.
 
+Version:   1.0
 Author:    Derrick Sobodash <derrick@sobodash.com>
-Copyright: (c) 2008 Derrick Sobodash
-Web site:  http://derrick.sobodash.com/
+Copyright: (c) 2008, 2012 Derrick Sobodash
+Web site:  https://github.com/sobodash/l5scenario/
 License:   BSD License <http://opensource.org/licenses/bsd-license.php>
 '''
 
@@ -32,7 +33,7 @@ except ImportError, err:
 	print "Could not load %s module." % (err)
 	raise SystemExit
 
-print "Langrisser V SCEN Tool (cli)\nCopyright (c) 2008 Derrick Sobodash\n"
+print "Langrisser V SCEN Tool (cli)\nCopyright (c) 2008, 2012 Derrick Sobodash\n"
 
 # Test the input and see if we got a file
 
@@ -64,7 +65,7 @@ if len(sys.argv) == 2:
 		offset = offset[0]
 		points.append(offset)
 	
-	print "Found " + str(len(points)) + " pointers ..."
+	print "Found " + str(len(points)) + " pointers..."
 	
 	# Seek to each pointer and write out the content from it to the next pointer
 	# to a unique file
@@ -76,7 +77,7 @@ if len(sys.argv) == 2:
 		o = open(os.path.join("l5chunks", "sc" + addzeros(i) + ".bin"), "w")
 		f.seek(points[i])
 		o.write(f.read(points[i+1] - points[i]))
-		print "Reading chunk " + str(i) + " (" + str(points[i+1] - points[i]) + " bytes) ..."
+		print "Reading chunk " + str(i) + " (" + str(points[i+1] - points[i]) + " bytes)..."
 	
 	f.close()
 	
@@ -89,7 +90,7 @@ elif len(sys.argv) == 3:
 	# Check all the files and make sure they are a multiple of 0x800 bytes.
 	# If not, pad them.
 	
-	print "Padding files to fill CD sectors ..."
+	print "Padding files to fill CD sectors..."
 	dirlist = glob.glob(os.path.join(dir, '*.bin'))
 	dirlist.sort()
 	dirsize = []
